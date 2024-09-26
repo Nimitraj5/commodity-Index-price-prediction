@@ -26,7 +26,7 @@ with open('trained_model.pkl', 'rb') as file:
     best_model = pickle.load(file)
 
 # Make sure you fit on the original Price column from your dataset
-scaler.fit(df_melted[['Price']])
+
 
 # Prepare features from your dataset
 df_melted.columns = ['COMM_NAME', 'COMM_CODE', 'COMM_WT', 'Quarter', 'Price', 'Quarter_numeric']
