@@ -1,4 +1,4 @@
-from sklearn.preprocessing import MinMaxScaler
+
 from flask import Flask, render_template, request
 import pandas as pd
 import pickle
@@ -24,7 +24,7 @@ commodity_mapping = {
 # Load the trained model from the pickle file
 with open('trained_model.pkl', 'rb') as file:
     best_model = pickle.load(file)
-scaler = MinMaxScaler()
+
 # Make sure you fit on the original Price column from your dataset
 scaler.fit(df_melted[['Price']])
 
@@ -54,8 +54,8 @@ def index():
         comm_code = commodity_mapping.get(comm_name)
         if comm_code is not None:
             predicted_price = predict_price(comm_code, weight, quarter_numeric)
-            predicted_prices = scaler.inverse_transform(predicted_price.reshape(-1, 1))
-            return render_template('1.html', predicted_price=predicted_prices[0][0], commodity=comm_name, year=year,
+           
+            return render_template('1.html', predicted_price=predicted_price, commodity=comm_name, year=year,
                                    quarter=quarter)
 
     return render_template('1.html')
